@@ -1,4 +1,4 @@
-# QCAZE - Sistema de Gestión de Préstamos
+愛# QCAZE - Sistema de Gestión de Préstamos
 
 ![QCAZE](img/screenshot.png)
 
@@ -34,7 +34,7 @@ Desarrollar un sistema de gestión de préstamos que permita registrar clientes,
 
 ---
 
-## Tecnologías Utilizadas
+經## Tecnologías Utilizadas
 
 ### Lenguaje de Programación
 
@@ -57,7 +57,7 @@ Instalación:
 pip install customtkinter
 ```
 
-#### Supabase
+#### 經Supabase
 
 Utilizada para conectar Python con la base de datos.
 
@@ -108,7 +108,7 @@ Almacena la URL y la KEY del proyecto Supabase.
 
 ---
 
-## Base de Datos
+## 這Base de Datos
 
 Tabla utilizada:
 
@@ -144,7 +144,7 @@ El sistema calcula automáticamente:
 
 ---
 
-### Visualizar Préstamos
+### 工程Visualizar Préstamos
 
 Muestra en una tabla:
 
