@@ -1,4 +1,4 @@
-愛# QCAZE - Sistema de Gestión de Préstamos
+# 愛QCAZE - Sistema de Gestión de Préstamos
 
 ![QCAZE](img/screenshot.png)
 
@@ -34,7 +34,7 @@ Desarrollar un sistema de gestión de préstamos que permita registrar clientes,
 
 ---
 
-經## Tecnologías Utilizadas
+## 經Tecnologías Utilizadas
 
 ### Lenguaje de Programación
 
