@@ -210,6 +210,6 @@ Total a pagar: $105.000
 
 ## Autor
 
-Proyecto desarrollado por John Smith.
+Proyecto desarrollado por Rodolfo Manga y Justin Myrs.
 
 Año: 2026.
