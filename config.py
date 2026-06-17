@@ -1,2 +1,9 @@
-SUPABASE_URL = "https://ravmabpzapwezdazhxia.supabase.co"
-SUPABASE_KEY = "sb_publishable_qGcDZpSPBI_IRk8e-DfRZQ_JkNWowMl"
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+class Settings(BaseSettings):
+    supabase_url: str
+    supabase_key: str
+
+    model_config = SettingsConfigDict(env_file=".env")
+
+settings = Settings()

@@ -1,75 +1,66 @@
-# 愛 QCAZE - Sistema de Gestión de Préstamos
+# 愛 QCAZE - Sistema de Gestión de Préstamos (API REST)
 
-![QCAZE](img/screenshot.png)
-
-Sistema desarrollado en Python y Supabase para la gestión de préstamos.
+Sistema backend desarrollado en Python (FastAPI) y Supabase para la gestión de préstamos. 
+El proyecto fue refactorizado recientemente desde una interfaz gráfica local con Tkinter hacia un entorno de API REST moderna y escalable.
 
 ## Descripción
 
-QCAZE es un sistema desarrollado en Python para la gestión de préstamos personales. El software permite registrar clientes, calcular automáticamente el interés quincenal, almacenar la información en una base de datos Supabase y administrar el estado de cada préstamo.
+QCAZE es un sistema desarrollado en Python para la gestión de préstamos personales. La API permite registrar clientes, calcular automáticamente el interés quincenal, almacenar la información en una base de datos Supabase y administrar el estado de cada préstamo de manera programática.
 
 Este proyecto fue desarrollado como una solución para agilizar el control de préstamos realizados manualmente, reduciendo errores y mejorando la organización de la información.
-
----
-
-## Problema Identificado
-
-Actualmente muchos prestamistas pequeños realizan el seguimiento de sus préstamos de forma manual, utilizando cuadernos o registros físicos.
-
-Esto genera inconvenientes como:
-
-* Pérdida de información.
-* Dificultad para calcular intereses.
-* Lentitud al consultar clientes.
-* Problemas para controlar pagos realizados.
-* Mayor riesgo de errores humanos.
-
-QCAZE busca automatizar este proceso mediante una aplicación sencilla y fácil de utilizar.
-
----
-
-## Objetivo General
-
-Desarrollar un sistema de gestión de préstamos que permita registrar clientes, calcular intereses automáticamente y almacenar la información en una base de datos para facilitar el control financiero.
 
 ---
 
 ## 經 Tecnologías Utilizadas
 
 ### Lenguaje de Programación
-
 * Python 3.12
 
 ### Base de Datos
-
 * Supabase
 * PostgreSQL
 
-### Librerías
+### Framework Backend
+* **FastAPI**: Framework web moderno y de alto rendimiento.
+* **Uvicorn**: Servidor ASGI para poner en marcha la aplicación.
+* **Pydantic**: Para la validación de esquemas de datos.
 
-#### CustomTkinter
+### Entorno y Dependencias
+* **Python-dotenv / Pydantic-settings**: Manejo seguro de credenciales con `.env`.
 
-Utilizada para el diseño de la interfaz gráfica.
+---
 
-Instalación:
+## 🚀 Instalación y Uso
 
+1. Clonar el repositorio:
 ```bash
-pip install customtkinter
+git clone <tu-repositorio>
+cd QCAZE
 ```
 
-#### Supabase
-
-Utilizada para conectar Python con la base de datos.
-
-Instalación:
-
+2. Crear y activar el entorno virtual local:
 ```bash
-pip install supabase
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-#### Tkinter
+3. Instalar las dependencias listadas:
+```bash
+pip install -r requirements.txt
+```
 
-Utilizada para la tabla de visualización de datos (Treeview).
+4. Configurar las credenciales. Renombra o crea un archivo `.env` en la raíz con tus variables de Supabase:
+```env
+SUPABASE_URL=tu_url_escondida
+SUPABASE_KEY=tu_apikey_escondida
+```
+
+5. Iniciar la aplicación:
+```bash
+uvicorn main:app --reload
+```
+
+Una vez que el servidor se encuentre ejecutándose, dirígete a `http://localhost:8000/docs` para visualizar la documentación interactiva SwaggerUI generada por FastAPI y probar cada funcionalidad fácilmente.
 
 ---
 
@@ -78,138 +69,65 @@ Utilizada para la tabla de visualización de datos (Treeview).
 ```text
 📁QCAZE/
 │
-├── main.py
-├── funciones.py
-├── conexion.py
-├── config.py
+├── main.py           # Entrada principal de la API FastAPI y configuración de CORS
+├── routes.py         # Endpoints de la API (POST, GET, PATCH, DELETE)
+├── schemas.py        # Modelos Pydantic para la validación de Requests y Responses
+├── conexion.py       # Interfaz con la base de datos Supabase
+├── config.py         # Configuración y Settings para llamar las credenciales del .env
+├── .env              # Variables de entorno ignoradas en git
+├── .gitignore        # Ignora archivos basura y credenciales para el repositorio
+├── requirements.txt  # Lista de librerías utilizadas
 └── README.md
 ```
-
-### main.py
-
-Contiene la interfaz gráfica y la interacción con el usuario.
-
-### funciones.py
-
-Contiene las funciones relacionadas con la lógica del sistema:
-
-* Registrar préstamos.
-* Consultar préstamos.
-* Eliminar préstamos.
-* Marcar préstamos como pagados.
-
-### conexion.py
-
-Establece la conexión con Supabase.
-
-### config.py
-
-Almacena la URL y la KEY del proyecto Supabase.
-
----
-
-## 這Base de Datos
-
-Tabla utilizada:
-
-### Prestamos
-
-Campos:
-
-| Campo          | Tipo   |
-| -------------- | ------ |
-| id             | bigint |
-| nombre_cliente | text   |
-| monto          | bigint |
-| interes        | bigint |
-| total_pagar    | bigint |
-| fecha_prestamo | date   |
-| estado         | text   |
 
 ---
 
 ## Funcionalidades Implementadas
 
-### Registrar Préstamo
-
+### Registrar Préstamo (`POST /prestamos`)
 Permite ingresar:
-
 * Nombre del cliente.
 * Monto prestado.
 
 El sistema calcula automáticamente:
-
 * Interés quincenal del 5%.
 * Total a pagar.
 
----
+### Visualizar Préstamos (`GET /prestamos`)
+Muestra un arreglo JSON con todos los préstamos documentados en Supabase.
 
-### 工程Visualizar Préstamos
+### Eliminar Préstamo (`DELETE /prestamos/{id}`)
+Permite eliminar el registro especificado.
 
-Muestra en una tabla:
-
-* ID.
-* Cliente.
-* Monto.
-* Interés.
-* Total.
-* Estado.
-* Fecha.
-
----
-
-### Eliminar Préstamo
-
-Permite eliminar registros seleccionados.
-
----
-
-### Marcar como Pagado
-
-Permite cambiar el estado de un préstamo de:
-
-```text
-Activo
-```
-
-a
-
-```text
-Pagado
-```
+### Marcar como Pagado (`PATCH /prestamos/{id}/pagar`)
+Permite cambiar el estado de un préstamo de "Activo" a "Pagado".
 
 ---
 
 ## Fórmula Utilizada
 
 Interés quincenal:
-
-Interés = Monto × 5%
+**Interés = Monto × 5%**
 
 Ejemplo:
-
-Monto: $100.000
-
-Interés: $5.000
-
-Total a pagar: $105.000
+* Monto: $100.000
+* Interés: $5.000
+* Total a pagar: $105.000
 
 ---
 
 ## Posibles Mejoras Futuras
 
-* Configurar porcentaje de interés desde la interfaz.
+* Configurar porcentaje de interés dinámico en el body.
 * Aplicar mora automática.
+* Integración con un frontend (React / Next.js) para consumir esta API.
 * Historial de pagos.
-* Reportes PDF.
-* Dashboard financiero.
-* Búsqueda de clientes.
-* Estadísticas de préstamos.
+* Autenticación con tokens JWT.
+* Dashboard estadístico de los préstamos.
 
 ---
 
 ## Autor
 
-Proyecto desarrollado por Rodolfo Manga y Justin Myrs.
-
+Proyecto desarrollado por Rodolfo Manga y Justin Myrs.  
 Año: 2026.
